@@ -1,2 +1,150 @@
-<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ГСА - игра</title><style>*{box-sizing:border-box}body{margin:0;font:15px Arial;background:#141518;color:#fff}button{font:inherit;cursor:pointer}.home{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}.home h1{font-size:clamp(34px,8vw,72px);margin:0 0 18px}.home p{color:#bfc4cb;max-width:650px;line-height:1.5}.red{border:0;border-radius:14px;padding:14px 20px;background:#d71920;color:#fff;font-weight:800}.badge{position:fixed;right:14px;bottom:14px;z-index:3;border:0;border-radius:18px;padding:13px 16px;background:linear-gradient(135deg,#ef2c34,#9e080d);color:#fff;font-weight:800;box-shadow:0 15px 40px #8f000099;animation:p 3s infinite}@keyframes p{50%{transform:translateY(-4px)}}.modal{position:fixed;inset:0;z-index:10;display:none;background:#000d;padding:10px}.modal.on{display:grid;place-items:center}.box{width:min(1000px,100%);max-height:100vh;overflow:auto;background:#202226;border-radius:20px}.head{display:flex;justify-content:space-between;align-items:center;padding:13px 15px;background:#181a1d;position:sticky;top:0;z-index:4}.hud{display:flex;gap:8px;align-items:center}.pill{background:#2c2f34;padding:8px 10px;border-radius:10px;font-weight:800}.x{width:38px;height:38px;border:0;border-radius:10px;background:#30343a;color:#fff;font-size:22px}.scene{position:relative;aspect-ratio:1672/941;background:#000}.scene img,.scene svg{position:absolute;inset:0;width:100%;height:100%}.scene img{object-fit:contain;pointer-events:none}.hot{fill:#fff0;stroke:#fff0;stroke-width:7}.hot:focus{stroke:#ffd54a;outline:none}.ring{fill:none;stroke:#31d486;stroke-width:7;opacity:0}.ring.on{opacity:1}.cover,.finish{position:absolute;inset:0;display:grid;place-items:center;background:#000a;padding:18px}.finish{display:none}.card{max-width:460px;text-align:center;background:#24272c;padding:24px;border-radius:20px}.card h2{margin:0 0 10px}.card p{color:#c4c9d0;line-height:1.45}.toast{position:absolute;left:14px;bottom:14px;max-width:calc(100% - 28px);background:#15171bf2;padding:12px 14px;border-radius:12px;display:none}.toast.on{display:block}.toast b{display:block;margin-bottom:4px}.toast span{color:#c6cbd2;font-size:13px}.coupon{font-size:28px;color:#ff4b53;font-weight:900;letter-spacing:2px;margin:15px 0}.hint{margin:12px;border:1px solid #444;background:#2c2f34;color:#fff;border-radius:11px;padding:10px 14px;font-weight:800}@media(max-width:600px){.modal{padding:0}.box{border-radius:0}.head{align-items:flex-start}.hud{flex-wrap:wrap;justify-content:flex-end}.badge{right:8px;bottom:8px;max-width:220px}}
-</style><body><main class="home"><div><h1>Найдите 5 неисправностей</h1><p>Первый уровень мини-игры для сайта автосервиса. Нажмите кнопку и попробуйте найти дефекты на автомобиле.</p><button class="red" id="open">Запустить игру</button></div></main><button class="badge" id="badge">🔧 Сыграть и получить подарок</button><div class="modal" id="modal"><div class="box"><div class="head"><b>Диагностика автомобиля</b><div class="hud"><span class="pill">Найдено: <b id="n">0</b>/5</span><span class="pill" id="t">01:30</span><button class="x" id="close">×</button></div></div><div class="scene" id="scene"><img src="data:image/webp;base64,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" alt="Автомобиль на подъёмнике"><svg id="map" viewBox="0 0 1672 941"><ellipse class="hot" data-i="tire" cx="568" cy="408" rx="105" ry="190" tabindex="0"/><ellipse class="ring" data-r="tire" cx="568" cy="408" rx="105" ry="190"/><ellipse class="hot" data-i="brake" cx="711" cy="369" rx="76" ry="92" tabindex="0"/><ellipse class="ring" data-r="brake" cx="711" cy="369" rx="76" ry="92"/><ellipse class="hot" data-i="shock" cx="650" cy="190" rx="78" ry="105" tabindex="0"/><ellipse class="ring" data-r="shock" cx="650" cy="190" rx="78" ry="105"/><ellipse class="hot" data-i="exhaust" cx="1155" cy="579" rx="205" ry="78" tabindex="0"/><ellipse class="ring" data-r="exhaust" cx="1155" cy="579" rx="205" ry="78"/><ellipse class="hot" data-i="fluid" cx="817" cy="900" rx="118" ry="42" tabindex="0"/><ellipse class="ring" data-r="fluid" cx="817" cy="900" rx="118" ry="42"/></svg><div class="toast" id="toast"><b id="a"></b><span id="b"></span></div><div class="cover" id="cover"><div class="card"><h2>Проведите диагностику</h2><p>Найдите 5 неисправностей за 90 секунд. После окончания времени можно продолжить.</p><button class="red" id="start">Начать диагностику</button></div></div><div class="finish" id="finish"><div class="card"><h2>Все неисправности найдены</h2><p>Первый уровень пройден.</p><div class="coupon">GSA-300</div><button class="red" id="copy">Скопировать купон</button><button class="hint" id="again">Пройти ещё раз</button></div></div></div><button class="hint" id="hint">Показать подсказку</button></div></div><script>(()=>{const D={tire:['Изношенная шина','Износ протектора ухудшает сцепление и увеличивает тормозной путь.'],brake:['Повреждённый тормозной диск','Коррозия и борозды могут снизить эффективность торможения.'],shock:['Потёкший амортизатор','Масляные следы могут говорить о потере герметичности.'],exhaust:['Повреждённая выхлопная система','Коррозия и утечка газов вызывают шум и запах выхлопа.'],fluid:['Утечка жидкости','Пятно под машиной может быть маслом, антифризом или другой жидкостью.']},$=s=>document.querySelector(s),M=$('#modal'),C=$('#cover'),F=$('#finish'),N=$('#n'),T=$('#t'),A=$('#a'),B=$('#b'),O=$('#toast');let f=new Set,s=90,q,h=0,p=false;function open(){M.classList.add('on');document.body.style.overflow='hidden'}function close(){M.classList.remove('on');document.body.style.overflow='';clearInterval(q);p=false}$('#open').onclick=$('#badge').onclick=open;$('#close').onclick=close;function toast(x,y){A.textContent=x;B.textContent=y;O.classList.add('on');setTimeout(()=>O.classList.remove('on'),3000)}function time(){T.textContent=String(s/60|0).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}function reset(){clearInterval(q);f.clear();s=90;p=false;N.textContent=0;time();document.querySelectorAll('.ring').forEach(x=>x.classList.remove('on'));F.style.display='none'}function start(){reset();C.style.display='none';p=true;q=setInterval(()=>{if(s){s--;time();if(!s)toast('Время вышло','Можно продолжить поиск.')}},1000)}$('#start').onclick=start;function hit(i){if(!p||f.has(i))return;f.add(i);document.querySelector(`[data-r=${i}]`).classList.add('on');N.textContent=f.size;toast(D[i][0],D[i][1]);if(f.size===5){clearInterval(q);p=false;setTimeout(()=>F.style.display='grid',600)}}document.querySelectorAll('.hot').forEach(x=>{x.onpointerdown=e=>{e.stopPropagation();hit(x.dataset.i)};x.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hit(x.dataset.i)}}});$('#hint').onclick=()=>{if(!p)return;let x=Object.keys(D).filter(i=>!f.has(i));if(x.length){let i=x[h++%x.length];toast('Подсказка',D[i][0])}};$('#again').onclick=start;$('#copy').onclick=async e=>{try{await navigator.clipboard.writeText('GSA-300');e.target.textContent='Код скопирован'}catch{e.target.textContent='GSA-300'}};document.onkeydown=e=>{if(e.key==='Escape')close()};reset()})();</script></body></html>
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ГСА - Найди 5 неисправностей</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;padding:0}body{font:15px/1.4 Arial,sans-serif;background:#141518;color:#fff}
+button{font:inherit;cursor:pointer}
+.home{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}
+.home h1{font-size:clamp(34px,8vw,72px);margin:0 0 18px}.home p{color:#c0c5cc;max-width:700px}
+.btn-red{border:0;border-radius:14px;padding:14px 20px;background:#d71920;color:#fff;font-weight:800}
+.badge{position:fixed;right:14px;bottom:14px;z-index:3;border:0;border-radius:18px;padding:13px 16px;background:linear-gradient(135deg,#ef2c34,#9e080d);color:#fff;font-weight:800;box-shadow:0 15px 40px #8f000099;animation:pulse 3s infinite;max-width:250px;text-align:left}
+@keyframes pulse{50%{transform:translateY(-4px)}}
+.modal{position:fixed;inset:0;z-index:10;display:none;background:#000c;padding:10px}.modal.on{display:grid;place-items:center}
+.box{width:min(1120px,100%);max-height:100vh;overflow:auto;background:#202226;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 15px;background:#181a1d;position:sticky;top:0;z-index:4}
+.brand{font-weight:800}.hud{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.pill{background:#2c2f34;padding:8px 10px;border-radius:10px;font-weight:800}.pill.low{background:#b10e14}.x{width:38px;height:38px;border:0;border-radius:10px;background:#30343a;color:#fff;font-size:22px}
+.helper{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 12px 0 12px;flex-wrap:wrap}.hint-btn,.ghost-btn{border:1px solid #555;background:#2c2f34;color:#fff;border-radius:11px;padding:10px 14px;font-weight:800}.ghost-btn{background:#fff;color:#111}
+.scene-scroll{margin:12px;overflow:hidden;border-radius:16px;background:#000;border:1px solid #35383d;overscroll-behavior:contain}
+.scene{position:relative;aspect-ratio:1672/941;background:#000;margin:0;width:100%;overflow:hidden}
+.scene img,.scene svg{position:absolute;inset:0;width:100%;height:100%}.scene img{object-fit:contain;pointer-events:none}
+.hot{fill:#fff0;stroke:#fff0;stroke-width:6}.hot:focus{stroke:#ffd54a;outline:none}
+.ring{fill:none;stroke:#31d486;stroke-width:7;opacity:0}.ring.on{opacity:1}.ring.hint{opacity:.85;stroke:#ffd54a}.wrong-x{stroke:#ff4c55;stroke-width:8;stroke-linecap:round}
+.cover,.finish{position:absolute;inset:0;display:grid;place-items:center;background:#000a;padding:18px}.finish{display:none}
+.card{max-width:500px;text-align:center;background:#24272c;padding:24px;border-radius:20px}.card h2{margin:0 0 10px}.card p{color:#c4c9d0;line-height:1.45}
+.toast{position:absolute;left:14px;bottom:14px;max-width:calc(100% - 28px);background:#15171bf2;padding:12px 14px;border-radius:12px;display:none}.toast.on{display:block}.toast b{display:block;margin-bottom:4px}.toast span{color:#c6cbd2;font-size:13px}
+.coupon{font-size:28px;color:#ff4b53;font-weight:900;letter-spacing:2px;margin:15px 0}
+.finish-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.status{padding:0 12px 12px;color:#cfd3d9;min-height:24px}.status.warn{color:#ffcc66}.status.ok{color:#7de1a3}
+@media(max-width:700px){
+  .modal{padding:0;align-items:stretch}.box{border-radius:0;width:100%;height:100dvh;max-height:100dvh;display:flex;flex-direction:column;overflow:hidden}
+  .head{flex:0 0 auto;align-items:center;padding:8px 9px;gap:6px}.brand{font-size:12px;line-height:1.2;max-width:122px}.hud{gap:5px}.pill{padding:6px 7px;font-size:11px}.x{width:34px;height:34px;font-size:20px}
+  .helper{flex:0 0 auto;padding:6px 8px;gap:6px;min-height:44px}.hint-btn{padding:7px 11px;font-size:12px}.status{padding:0;font-size:11px;line-height:1.2;flex:1;text-align:right;min-height:0}
+  .scene-scroll{flex:1 1 auto;min-height:0;margin:0 8px 8px;overflow:auto hidden;border-radius:12px;scrollbar-width:thin;-webkit-overflow-scrolling:touch;touch-action:pan-x;overscroll-behavior-x:contain}
+  .scene{height:100%;width:max(100%,calc((100dvh - 102px) * 1.77778));min-width:760px;max-width:none;aspect-ratio:auto}
+  .scene img,.scene svg{width:100%;height:100%;object-fit:fill}
+  .cover,.finish{position:sticky;left:0;width:min(100vw - 16px,430px);min-width:calc(100vw - 16px)}
+  .card{padding:18px 14px;border-radius:15px}.card h2{font-size:19px}.card p{font-size:13px}.coupon{font-size:23px}
+  .badge{right:8px;bottom:8px;max-width:210px;font-size:13px}.finish-actions .btn-red,.finish-actions .ghost-btn{width:100%}
+}
+@media(max-width:700px) and (orientation:landscape){
+  .box{height:100dvh}.brand{max-width:none}.scene-scroll{overflow:hidden;margin:0 8px 8px}.scene{width:100%;min-width:0;height:auto;aspect-ratio:1672/941}.scene img,.scene svg{object-fit:contain}.status{text-align:left}
+}
+</style>
+</head>
+<body>
+<main class="home"><div><h1>Найдите 5 неисправностей</h1><p>Обновлённая версия с более чёткой фотографией. Нажмите кнопку и попробуйте найти все дефекты на машине.</p><button class="btn-red" id="openMain">Запустить игру</button></div></main>
+<button class="badge" id="badge">🔧 Сыграть и получить подарок</button>
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="box">
+    <div class="head">
+      <div class="brand">Гараж Счастливого Автомобиля</div>
+      <div class="hud">
+        <span class="pill">Найдено: <b id="foundCount">0</b>/5</span>
+        <span class="pill" id="timerPill">Осталось: <b id="timer">01:30</b></span>
+        <button class="x" id="close">×</button>
+      </div>
+    </div>
+    <div class="helper">
+      <button class="hint-btn" id="hintBtn">Подсказка</button>
+      <div id="topStatus" class="status"></div>
+    </div>
+    <div class="scene-scroll" id="sceneScroll" aria-label="Игровое изображение. На вертикальном экране перемещайте его пальцем влево и вправо.">
+    <div class="scene" id="scene">
+      <img id="gsaCarImage" alt="Автомобиль на подъёмнике">
+      <svg id="map" viewBox="0 0 1672 941" aria-label="Игровая карта">
+        <ellipse class="hot" data-i="tire" cx="568" cy="408" rx="105" ry="190" tabindex="0"/>
+        <ellipse class="ring" data-r="tire" cx="568" cy="408" rx="105" ry="190"/>
+        <ellipse class="hot" data-i="brake" cx="711" cy="369" rx="76" ry="92" tabindex="0"/>
+        <ellipse class="ring" data-r="brake" cx="711" cy="369" rx="76" ry="92"/>
+        <ellipse class="hot" data-i="shock" cx="650" cy="190" rx="78" ry="105" tabindex="0"/>
+        <ellipse class="ring" data-r="shock" cx="650" cy="190" rx="78" ry="105"/>
+        <ellipse class="hot" data-i="exhaust" cx="1155" cy="579" rx="205" ry="78" tabindex="0"/>
+        <ellipse class="ring" data-r="exhaust" cx="1155" cy="579" rx="205" ry="78"/>
+        <ellipse class="hot" data-i="fluid" cx="817" cy="900" rx="118" ry="42" tabindex="0"/>
+        <ellipse class="ring" data-r="fluid" cx="817" cy="900" rx="118" ry="42"/>
+      </svg>
+      <div class="toast" id="toast"><b id="toastTitle"></b><span id="toastText"></span></div>
+      <div class="cover" id="cover"><div class="card"><h2>Проведите диагностику</h2><p>Найдите 5 неисправностей за 90 секунд. После окончания времени можно продолжить поиск. В этой версии уже добавлены звуки для верного и неверного нажатия.</p><button class="btn-red" id="start">Начать диагностику</button></div></div>
+      <div class="finish" id="finish"><div class="card"><h2>Все неисправности найдены</h2><p>Первый уровень пройден.</p><div class="coupon">GSA-300</div><div class="finish-actions"><button class="btn-red" id="copyBtn">Скопировать купон</button><button class="ghost-btn" id="againBtn">Пройти ещё раз</button></div></div></div>
+    </div>
+    </div>
+  </div>
+</div>
+<script src="img-1.js"></script>
+<script src="img-2.js"></script>
+<script src="img-3.js"></script>
+<script src="img-4.js"></script>
+<script src="img-5.js"></script>
+<script src="img-6.js"></script>
+<script src="img-7.js"></script>
+<script src="img-8.js"></script>
+<script>
+(()=>{
+  const imageElement=document.getElementById('gsaCarImage');
+  if(imageElement && window.GSA_IMG){ imageElement.src='data:image/webp;base64,'+window.GSA_IMG; }
+  const DEFECTS={
+    tire:['Изношенная шина','Износ протектора ухудшает сцепление и увеличивает тормозной путь.'],
+    brake:['Повреждённый тормозной диск','Коррозия и борозды могут снизить эффективность торможения.'],
+    shock:['Потёкший амортизатор','Масляные следы могут говорить о потере герметичности амортизатора.'],
+    exhaust:['Повреждённая выхлопная система','Коррозия и утечка газов вызывают шум и запах выхлопа.'],
+    fluid:['Утечка жидкости','Пятно под машиной может быть маслом, антифризом или другой жидкостью.']
+  };
+  const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
+  const modal=$('#modal'), cover=$('#cover'), finish=$('#finish'), toast=$('#toast'), timer=$('#timer'), timerPill=$('#timerPill'), foundCount=$('#foundCount'), topStatus=$('#topStatus'), sceneScroll=$('#sceneScroll'), map=$('#map');
+  let found=new Set(), seconds=90, timerId=null, playing=false, hintIndex=0, audioCtx=null;
+  function ensureAudio(){ if(!audioCtx){ const AC=window.AudioContext||window.webkitAudioContext; if(AC) audioCtx=new AC(); } if(audioCtx && audioCtx.state==='suspended') audioCtx.resume(); }
+  function tone(freq,dur,type,vol,delay){ if(!audioCtx) return; const now=audioCtx.currentTime+(delay||0); const o=audioCtx.createOscillator(), g=audioCtx.createGain(); o.type=type||'sine'; o.frequency.setValueAtTime(freq,now); g.gain.setValueAtTime(0.0001,now); g.gain.exponentialRampToValueAtTime(vol||0.08,now+0.01); g.gain.exponentialRampToValueAtTime(0.0001,now+dur); o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+dur+0.02); }
+  function playCorrect(){ ensureAudio(); tone(660,0.12,'triangle',0.07,0); tone(880,0.16,'triangle',0.07,0.12); }
+  function playWrong(){ ensureAudio(); tone(220,0.18,'sawtooth',0.05,0); tone(180,0.18,'sawtooth',0.04,0.08); }
+  function openGame(){ modal.classList.add('on'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function closeGame(){ modal.classList.remove('on'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; stopTimer(); playing=false; }
+  $('#openMain').onclick=$('#badge').onclick=openGame; $('#close').onclick=closeGame;
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeGame(); });
+  function format(sec){ return String(sec/60|0).padStart(2,'0')+':'+String(sec%60).padStart(2,'0'); }
+  function updateTimer(){ timer.textContent=format(seconds); if(seconds<=15) timerPill.classList.add('low'); else timerPill.classList.remove('low'); }
+  function showToast(title,text){ $('#toastTitle').textContent=title; $('#toastText').textContent=text; toast.classList.add('on'); clearTimeout(showToast.tid); showToast.tid=setTimeout(()=>toast.classList.remove('on'),2800); }
+  function reset(){ stopTimer(); found.clear(); seconds=90; playing=false; hintIndex=0; updateTimer(); foundCount.textContent='0'; topStatus.textContent=''; topStatus.className='status'; finish.style.display='none'; cover.style.display='grid'; $$('.ring').forEach(r=>r.classList.remove('on','hint')); $$('.wrong-mark').forEach(x=>x.remove()); }
+  function start(){ ensureAudio(); found.clear(); seconds=90; playing=true; updateTimer(); foundCount.textContent='0'; topStatus.textContent=(window.innerWidth<=700&&window.innerHeight>window.innerWidth)?'Двигайте изображение пальцем влево и вправо':''; topStatus.className='status'; finish.style.display='none'; cover.style.display='none'; $$('.ring').forEach(r=>r.classList.remove('on','hint')); $$('.wrong-mark').forEach(x=>x.remove()); if(sceneScroll){ sceneScroll.scrollLeft=0; } timerId=setInterval(()=>{ if(seconds>0){ seconds--; updateTimer(); if(seconds===0){ topStatus.textContent='Время вышло, но можно продолжить поиск'; topStatus.className='status warn'; showToast('Время вышло','Можно продолжить поиск.'); } } },1000); }
+  function stopTimer(){ if(timerId){ clearInterval(timerId); timerId=null; } }
+  $('#start').onclick=start; $('#againBtn').onclick=start;
+  function finishLevel(){ playing=false; stopTimer(); topStatus.textContent='Отлично! Все дефекты найдены'; topStatus.className='status ok'; setTimeout(()=>finish.style.display='grid',350); }
+  function markFound(id){ document.querySelector('[data-r="'+id+'"]').classList.add('on'); found.add(id); foundCount.textContent=String(found.size); const d=DEFECTS[id]; playCorrect(); showToast(d[0],d[1]); if(found.size===5) finishLevel(); }
+  function hint(){ if(!playing) return; const remain=Object.keys(DEFECTS).filter(k=>!found.has(k)); if(!remain.length) return; const id=remain[hintIndex % remain.length]; hintIndex++; const ring=document.querySelector('[data-r="'+id+'"]').classList; ring.add('hint'); setTimeout(()=>ring.remove('hint'),1200); showToast('Подсказка',DEFECTS[id][0]); }
+  $('#hintBtn').onclick=hint;
+  function wrongMark(x,y){ const ns='http://www.w3.org/2000/svg'; const g=document.createElementNS(ns,'g'); g.setAttribute('class','wrong-mark'); const l1=document.createElementNS(ns,'line'); l1.setAttribute('class','wrong-x'); l1.setAttribute('x1',x-12); l1.setAttribute('y1',y-12); l1.setAttribute('x2',x+12); l1.setAttribute('y2',y+12); const l2=document.createElementNS(ns,'line'); l2.setAttribute('class','wrong-x'); l2.setAttribute('x1',x+12); l2.setAttribute('y1',y-12); l2.setAttribute('x2',x-12); l2.setAttribute('y2',y+12); g.appendChild(l1); g.appendChild(l2); $('#map').appendChild(g); setTimeout(()=>g.remove(),650); }
+  function svgPoint(evt){ const svg=$('#map'); const pt=svg.createSVGPoint(); pt.x=evt.clientX; pt.y=evt.clientY; return pt.matrixTransform(svg.getScreenCTM().inverse()); }
+  let pointerStart=null;
+  map.addEventListener('pointerdown',e=>{
+    if(!playing) return;
+    pointerStart={x:e.clientX,y:e.clientY,id:e.target.classList.contains('hot')?e.target.dataset.i:null};
+  });
+  map.addEventListener('pointerup',e=>{
+    if(!playing||!pointerStart) return;
+    const dx=e.clientX-pointerStart.x, dy=e.clientY-pointerStart.y, moved=Math.sqrt(dx*dx+dy*dy);
+    const id=pointerStart.id; pointerStart=null;
+    if(moved>12) return;
+    if(id){ if(!found.has(id)) markFound(id); return; }
+    const p=svgPoint(e); wrongMark(p.x,p.y); playWrong(); showToast('Мимо','Здесь всё в порядке. Посмотрите внимательнее.');
+  });
+  map.addEventListener('pointercancel',()=>{ pointerStart=null; });
+  $$('.hot').forEach(el=>{
+    el.addEventListener('keydown',e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); if(!playing) return; const id=el.dataset.i; if(found.has(id)) return; markFound(id); } });
+  });
+  $('#copyBtn').onclick=async e=>{ try{ await navigator.clipboard.writeText('GSA-300'); e.target.textContent='Код скопирован'; }catch(err){ e.target.textContent='GSA-300'; } };
+  reset();
+})();
+</script>
+</body>
+</html>
