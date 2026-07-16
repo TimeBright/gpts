@@ -2,152 +2,71 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=yes">
 <title>ГСА - Найди 5 неисправностей</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;padding:0}body{font:15px/1.4 Arial,sans-serif;background:#141518;color:#fff}
-button{font:inherit;cursor:pointer}
-.home{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}
-.home h1{font-size:clamp(34px,8vw,72px);margin:0 0 18px}.home p{color:#c0c5cc;max-width:700px}
-.btn-red{border:0;border-radius:14px;padding:14px 20px;background:#d71920;color:#fff;font-weight:800}
-.badge{position:fixed;right:14px;bottom:14px;z-index:3;border:0;border-radius:18px;padding:13px 16px;background:linear-gradient(135deg,#ef2c34,#9e080d);color:#fff;font-weight:800;box-shadow:0 15px 40px #8f000099;animation:pulse 3s infinite;max-width:250px;text-align:left}
-@keyframes pulse{50%{transform:translateY(-4px)}}
-.modal{position:fixed;inset:0;z-index:10;display:none;background:#000c;padding:10px}.modal.on{display:grid;place-items:center}
-.box{width:min(1120px,100%);max-height:100vh;overflow:auto;background:#202226;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
-.head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 15px;background:#181a1d;position:sticky;top:0;z-index:4}
-.brand{font-weight:800}.hud{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.pill{background:#2c2f34;padding:8px 10px;border-radius:10px;font-weight:800}.pill.low{background:#b10e14}.x{width:38px;height:38px;border:0;border-radius:10px;background:#30343a;color:#fff;font-size:22px}
-.helper{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 12px 0 12px;flex-wrap:wrap}.hint-btn,.ghost-btn{border:1px solid #555;background:#2c2f34;color:#fff;border-radius:11px;padding:10px 14px;font-weight:800}.ghost-btn{background:#fff;color:#111}
-.scene-scroll{margin:12px;overflow:hidden;border-radius:16px;background:#000;border:1px solid #35383d;overscroll-behavior:contain}
-.scene{position:relative;aspect-ratio:1672/941;background:#000;margin:0;width:100%;overflow:hidden}
-.scene img,.scene svg{position:absolute;inset:0;width:100%;height:100%}.scene img{object-fit:contain;pointer-events:none}
-.hot{fill:#fff0;stroke:#fff0;stroke-width:6}.hot:focus{stroke:#ffd54a;outline:none}
-.ring{fill:none;stroke:#31d486;stroke-width:7;opacity:0}.ring.on{opacity:1}.ring.hint{opacity:.85;stroke:#ffd54a}.wrong-x{stroke:#ff4c55;stroke-width:8;stroke-linecap:round}
-.cover,.finish{position:absolute;inset:0;display:grid;place-items:center;background:#000a;padding:18px}.finish{display:none}
-.card{max-width:500px;text-align:center;background:#24272c;padding:24px;border-radius:20px}.card h2{margin:0 0 10px}.card p{color:#c4c9d0;line-height:1.45}
-.toast{position:absolute;left:14px;bottom:14px;max-width:calc(100% - 28px);background:#15171bf2;padding:12px 14px;border-radius:12px;display:none}.toast.on{display:block}.toast b{display:block;margin-bottom:4px}.toast span{color:#c6cbd2;font-size:13px}
-.coupon{font-size:28px;color:#ff4b53;font-weight:900;letter-spacing:2px;margin:15px 0}
-.finish-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.status{padding:0 12px 12px;color:#cfd3d9;min-height:24px}.status.warn{color:#ffcc66}.status.ok{color:#7de1a3}
+:root{--red:#d71920;--dark:#181a1d;--panel:#24272c;--green:#31d486}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%}body{font:15px/1.4 Arial,sans-serif;background:#141518;color:#fff}button{font:inherit;cursor:pointer}
+.home{min-height:100vh;display:grid;place-items:center;text-align:center;padding:24px}.home h1{font-size:clamp(34px,8vw,72px);margin:0 0 18px}.home p{color:#c0c5cc;max-width:700px}.btn-red{border:0;border-radius:14px;padding:14px 20px;background:var(--red);color:#fff;font-weight:800}
+.badge{position:fixed;right:14px;bottom:14px;z-index:3;border:0;border-radius:18px;padding:13px 16px;background:linear-gradient(135deg,#ef2c34,#9e080d);color:#fff;font-weight:800;box-shadow:0 15px 40px #8f000099;animation:pulse 3s infinite;max-width:250px;text-align:left}@keyframes pulse{50%{transform:translateY(-4px)}}
+.modal{position:fixed;inset:0;z-index:10;display:none;background:#000d;padding:10px}.modal.on{display:grid;place-items:center}.box{width:min(1180px,100%);max-height:100vh;overflow:auto;background:#202226;border-radius:20px;box-shadow:0 20px 50px #0008}.head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:13px 15px;background:var(--dark);position:sticky;top:0;z-index:20}.brand{font-weight:800}.hud{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.pill{background:#2c2f34;padding:8px 10px;border-radius:10px;font-weight:800}.pill.low{background:#b10e14}.x{width:38px;height:38px;border:0;border-radius:10px;background:#30343a;color:#fff;font-size:22px}
+.helper{display:flex;gap:8px;align-items:center;padding:10px 12px 0;flex-wrap:wrap}.helper button,.ghost-btn{border:1px solid #555;background:#2c2f34;color:#fff;border-radius:11px;padding:9px 13px;font-weight:800}.ghost-btn{background:#fff;color:#111}.status{margin-left:auto;color:#cfd3d9;font-size:13px}.status.warn{color:#ffcc66}.status.ok{color:#7de1a3}
+.scene-scroll{margin:12px;overflow:hidden;border-radius:16px;background:#000;border:1px solid #35383d;overscroll-behavior:contain}.scene{position:relative;width:100%;aspect-ratio:3/2;background:#000;overflow:hidden}.scene img,.scene svg{position:absolute;inset:0;width:100%;height:100%;display:block}.scene img{object-fit:fill;pointer-events:none;image-rendering:auto}.scene svg{touch-action:manipulation}.hot{fill:#fff0;stroke:#fff0;stroke-width:7}.hot:focus{stroke:#ffd54a;outline:none}.ring{fill:none;stroke:var(--green);stroke-width:8;opacity:0;pointer-events:none}.ring.on{opacity:1}.ring.hint{opacity:.9;stroke:#ffd54a;animation:hintPulse .9s ease-in-out 2}@keyframes hintPulse{50%{stroke-width:16}}.wrong-x{stroke:#ff4c55;stroke-width:9;stroke-linecap:round}
+.cover,.finish{position:absolute;inset:0;z-index:12;display:grid;place-items:center;background:#000b;padding:18px}.finish{display:none}.card{max-width:500px;text-align:center;background:var(--panel);padding:24px;border-radius:20px;box-shadow:0 16px 40px #0008}.card h2{margin:0 0 10px}.card p{color:#c4c9d0;line-height:1.45}.toast{position:absolute;z-index:15;left:14px;bottom:14px;max-width:calc(100% - 28px);background:#15171bf2;padding:12px 14px;border-radius:12px;display:none}.toast.on{display:block}.toast b{display:block;margin-bottom:4px}.toast span{color:#c6cbd2;font-size:13px}.coupon{font-size:28px;color:#ff4b53;font-weight:900;letter-spacing:2px;margin:15px 0}.finish-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
 @media(max-width:700px){
-  .modal{padding:0;align-items:stretch}.box{border-radius:0;width:100%;height:100dvh;max-height:100dvh;display:flex;flex-direction:column;overflow:hidden}
-  .head{flex:0 0 auto;align-items:center;padding:8px 9px;gap:6px}.brand{font-size:12px;line-height:1.2;max-width:122px}.hud{gap:5px}.pill{padding:6px 7px;font-size:11px}.x{width:34px;height:34px;font-size:20px}
-  .helper{flex:0 0 auto;padding:6px 8px;gap:6px;min-height:44px}.hint-btn{padding:7px 11px;font-size:12px}.status{padding:0;font-size:11px;line-height:1.2;flex:1;text-align:right;min-height:0}
-  .scene-scroll{flex:1 1 auto;min-height:0;margin:0 8px 8px;overflow:auto hidden;border-radius:12px;scrollbar-width:thin;-webkit-overflow-scrolling:touch;touch-action:pan-x;overscroll-behavior-x:contain}
-  .scene{height:100%;width:max(100%,calc((100dvh - 102px) * 1.77778));min-width:760px;max-width:none;aspect-ratio:auto}
-  .scene img,.scene svg{width:100%;height:100%;object-fit:fill}
-  .cover,.finish{position:sticky;left:0;width:min(100vw - 16px,430px);min-width:calc(100vw - 16px)}
-  .card{padding:18px 14px;border-radius:15px}.card h2{font-size:19px}.card p{font-size:13px}.coupon{font-size:23px}
-  .badge{right:8px;bottom:8px;max-width:210px;font-size:13px}.finish-actions .btn-red,.finish-actions .ghost-btn{width:100%}
+ .modal{padding:0;align-items:stretch}.box{border-radius:0;width:100%;height:100dvh;max-height:100dvh;display:flex;flex-direction:column;overflow:hidden}.head{flex:0 0 auto;padding:7px 8px;gap:5px}.brand{font-size:11px;line-height:1.15;max-width:105px}.hud{gap:4px}.pill{padding:6px;font-size:10.5px}.x{width:33px;height:33px;font-size:19px}.helper{flex:0 0 auto;padding:6px 8px;gap:5px;min-height:43px}.helper button{padding:7px 9px;font-size:11px}.status{font-size:10.5px;line-height:1.15;text-align:right;max-width:145px}
+ .scene-scroll{flex:1 1 auto;min-height:0;margin:0 7px 7px;overflow:auto;border-radius:11px;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;scrollbar-width:thin}.scene{width:1320px;height:880px;max-width:none;aspect-ratio:auto}.scene img,.scene svg{width:1320px;height:880px}.scene svg{touch-action:pan-x pan-y}
+ .cover,.finish{position:fixed;inset:0;z-index:40}.card{width:min(92vw,430px);padding:20px 15px;border-radius:16px}.card h2{font-size:20px}.card p{font-size:13px}.toast{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);width:min(92vw,480px);max-width:none}.badge{right:8px;bottom:8px;max-width:210px;font-size:13px}.finish-actions .btn-red,.finish-actions .ghost-btn{width:100%}
 }
-@media(max-width:700px) and (orientation:landscape){
-  .box{height:100dvh}.brand{max-width:none}.scene-scroll{overflow:hidden;margin:0 8px 8px}.scene{width:100%;min-width:0;height:auto;aspect-ratio:1672/941}.scene img,.scene svg{object-fit:contain}.status{text-align:left}
-}
+@media(max-width:700px) and (orientation:landscape){.scene-scroll{overflow:auto}.scene{width:900px;height:600px}.scene img,.scene svg{width:900px;height:600px}.brand{max-width:180px}.status{max-width:none}}
 </style>
 </head>
 <body>
-<main class="home"><div><h1>Найдите 5 неисправностей</h1><p>Обновлённая версия с более чёткой фотографией. Нажмите кнопку и попробуйте найти все дефекты на машине.</p><button class="btn-red" id="openMain">Запустить игру</button></div></main>
+<main class="home"><div><h1>Найдите 5 неисправностей</h1><p>Мини-игра автосервиса. На телефоне изображение можно двигать пальцем во всех направлениях.</p><button class="btn-red" id="openMain">Запустить игру</button></div></main>
 <button class="badge" id="badge">🔧 Сыграть и получить подарок</button>
-<div class="modal" id="modal" aria-hidden="true">
-  <div class="box">
-    <div class="head">
-      <div class="brand">Гараж Счастливого Автомобиля</div>
-      <div class="hud">
-        <span class="pill">Найдено: <b id="foundCount">0</b>/5</span>
-        <span class="pill" id="timerPill">Осталось: <b id="timer">01:30</b></span>
-        <button class="x" id="close">×</button>
-      </div>
-    </div>
-    <div class="helper">
-      <button class="hint-btn" id="hintBtn">Подсказка</button>
-      <div id="topStatus" class="status"></div>
-    </div>
-    <div class="scene-scroll" id="sceneScroll" aria-label="Игровое изображение. На вертикальном экране перемещайте его пальцем влево и вправо.">
-    <div class="scene" id="scene">
-      <img id="gsaCarImage" alt="Автомобиль на подъёмнике">
-      <svg id="map" viewBox="0 0 1672 941" aria-label="Игровая карта">
-        <ellipse class="hot" data-i="tire" cx="568" cy="408" rx="105" ry="190" tabindex="0"/>
-        <ellipse class="ring" data-r="tire" cx="568" cy="408" rx="105" ry="190"/>
-        <ellipse class="hot" data-i="brake" cx="711" cy="369" rx="76" ry="92" tabindex="0"/>
-        <ellipse class="ring" data-r="brake" cx="711" cy="369" rx="76" ry="92"/>
-        <ellipse class="hot" data-i="shock" cx="650" cy="190" rx="78" ry="105" tabindex="0"/>
-        <ellipse class="ring" data-r="shock" cx="650" cy="190" rx="78" ry="105"/>
-        <ellipse class="hot" data-i="exhaust" cx="1155" cy="579" rx="205" ry="78" tabindex="0"/>
-        <ellipse class="ring" data-r="exhaust" cx="1155" cy="579" rx="205" ry="78"/>
-        <ellipse class="hot" data-i="fluid" cx="817" cy="900" rx="118" ry="42" tabindex="0"/>
-        <ellipse class="ring" data-r="fluid" cx="817" cy="900" rx="118" ry="42"/>
-      </svg>
-      <div class="toast" id="toast"><b id="toastTitle"></b><span id="toastText"></span></div>
-      <div class="cover" id="cover"><div class="card"><h2>Проведите диагностику</h2><p>Найдите 5 неисправностей за 90 секунд. После окончания времени можно продолжить поиск. В этой версии уже добавлены звуки для верного и неверного нажатия.</p><button class="btn-red" id="start">Начать диагностику</button></div></div>
-      <div class="finish" id="finish"><div class="card"><h2>Все неисправности найдены</h2><p>Первый уровень пройден.</p><div class="coupon">GSA-300</div><div class="finish-actions"><button class="btn-red" id="copyBtn">Скопировать купон</button><button class="ghost-btn" id="againBtn">Пройти ещё раз</button></div></div></div>
-    </div>
-    </div>
-  </div>
-</div>
-<script src="img-1.js"></script>
-<script src="img-2.js"></script>
-<script src="img-3.js"></script>
-<script src="img-4.js"></script>
-<script src="img-5.js"></script>
-<script src="img-6a.js"></script>
-<script src="img-6b.js"></script>
-<script src="img-7a.js"></script>
-<script src="img-7b.js"></script>
-<script src="img-8a.js"></script>
-<script src="img-8b.js"></script>
+<div class="modal" id="modal" aria-hidden="true"><div class="box">
+ <div class="head"><div class="brand">Гараж Счастливого Автомобиля</div><div class="hud"><span class="pill">Найдено: <b id="foundCount">0</b>/5</span><span class="pill" id="timerPill">Осталось: <b id="timer">01:30</b></span><button class="x" id="close" aria-label="Закрыть">×</button></div></div>
+ <div class="helper"><button id="hintBtn">Подсказка</button><button id="soundBtn">🔊 Проверить звук</button><div id="topStatus" class="status"></div></div>
+ <div class="scene-scroll" id="sceneScroll"><div class="scene" id="scene">
+  <img id="gsaCarImage" alt="Автомобиль на подъёмнике">
+  <svg id="map" viewBox="0 0 1536 1024" aria-label="Игровая карта">
+   <ellipse class="hot" data-i="tire" cx="545" cy="430" rx="115" ry="215" tabindex="0"/><ellipse class="ring" data-r="tire" cx="545" cy="430" rx="115" ry="215"/>
+   <ellipse class="hot" data-i="brake" cx="680" cy="395" rx="78" ry="105" tabindex="0"/><ellipse class="ring" data-r="brake" cx="680" cy="395" rx="78" ry="105"/>
+   <ellipse class="hot" data-i="shock" cx="650" cy="185" rx="72" ry="125" tabindex="0"/><ellipse class="ring" data-r="shock" cx="650" cy="185" rx="72" ry="125"/>
+   <ellipse class="hot" data-i="exhaust" cx="1040" cy="615" rx="245" ry="92" tabindex="0"/><ellipse class="ring" data-r="exhaust" cx="1040" cy="615" rx="245" ry="92"/>
+   <ellipse class="hot" data-i="fluid" cx="810" cy="925" rx="125" ry="58" tabindex="0"/><ellipse class="ring" data-r="fluid" cx="810" cy="925" rx="125" ry="58"/>
+  </svg>
+  <div class="toast" id="toast"><b id="toastTitle"></b><span id="toastText"></span></div>
+  <div class="cover" id="cover"><div class="card"><h2>Проведите диагностику</h2><p>Найдите 5 неисправностей за 90 секунд. Изображение загружено в полном разрешении. После нажатия кнопки прозвучит проверочный сигнал.</p><button class="btn-red" id="start">Начать диагностику</button></div></div>
+  <div class="finish" id="finish"><div class="card"><h2>Все неисправности найдены</h2><p>Первый уровень пройден.</p><div class="coupon">GSA-300</div><div class="finish-actions"><button class="btn-red" id="copyBtn">Скопировать купон</button><button class="ghost-btn" id="againBtn">Пройти ещё раз</button></div></div></div>
+ </div></div>
+</div></div>
+<script src="img-1.js"></script><script src="img-2.js"></script><script src="img-3.js"></script><script src="img-4.js"></script><script src="img-5.js"></script><script src="img-6a.js"></script><script src="img-6b.js"></script><script src="img-7a.js"></script><script src="img-7b.js"></script><script src="img-8a.js"></script><script src="img-8b.js"></script>
 <script>
 (()=>{
-  const imageElement=document.getElementById('gsaCarImage');
-  if(imageElement && window.GSA_IMG){ imageElement.src='data:image/webp;base64,'+window.GSA_IMG; }
-  const DEFECTS={
-    tire:['Изношенная шина','Износ протектора ухудшает сцепление и увеличивает тормозной путь.'],
-    brake:['Повреждённый тормозной диск','Коррозия и борозды могут снизить эффективность торможения.'],
-    shock:['Потёкший амортизатор','Масляные следы могут говорить о потере герметичности амортизатора.'],
-    exhaust:['Повреждённая выхлопная система','Коррозия и утечка газов вызывают шум и запах выхлопа.'],
-    fluid:['Утечка жидкости','Пятно под машиной может быть маслом, антифризом или другой жидкостью.']
-  };
-  const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s);
-  const modal=$('#modal'), cover=$('#cover'), finish=$('#finish'), toast=$('#toast'), timer=$('#timer'), timerPill=$('#timerPill'), foundCount=$('#foundCount'), topStatus=$('#topStatus'), sceneScroll=$('#sceneScroll'), map=$('#map');
-  let found=new Set(), seconds=90, timerId=null, playing=false, hintIndex=0, audioCtx=null;
-  function ensureAudio(){ if(!audioCtx){ const AC=window.AudioContext||window.webkitAudioContext; if(AC) audioCtx=new AC(); } if(audioCtx && audioCtx.state==='suspended') audioCtx.resume(); }
-  function tone(freq,dur,type,vol,delay){ if(!audioCtx) return; const now=audioCtx.currentTime+(delay||0); const o=audioCtx.createOscillator(), g=audioCtx.createGain(); o.type=type||'sine'; o.frequency.setValueAtTime(freq,now); g.gain.setValueAtTime(0.0001,now); g.gain.exponentialRampToValueAtTime(vol||0.08,now+0.01); g.gain.exponentialRampToValueAtTime(0.0001,now+dur); o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+dur+0.02); }
-  function playCorrect(){ ensureAudio(); tone(660,0.12,'triangle',0.07,0); tone(880,0.16,'triangle',0.07,0.12); }
-  function playWrong(){ ensureAudio(); tone(220,0.18,'sawtooth',0.05,0); tone(180,0.18,'sawtooth',0.04,0.08); }
-  function openGame(){ modal.classList.add('on'); modal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
-  function closeGame(){ modal.classList.remove('on'); modal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; stopTimer(); playing=false; }
-  $('#openMain').onclick=$('#badge').onclick=openGame; $('#close').onclick=closeGame;
-  document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeGame(); });
-  function format(sec){ return String(sec/60|0).padStart(2,'0')+':'+String(sec%60).padStart(2,'0'); }
-  function updateTimer(){ timer.textContent=format(seconds); if(seconds<=15) timerPill.classList.add('low'); else timerPill.classList.remove('low'); }
-  function showToast(title,text){ $('#toastTitle').textContent=title; $('#toastText').textContent=text; toast.classList.add('on'); clearTimeout(showToast.tid); showToast.tid=setTimeout(()=>toast.classList.remove('on'),2800); }
-  function reset(){ stopTimer(); found.clear(); seconds=90; playing=false; hintIndex=0; updateTimer(); foundCount.textContent='0'; topStatus.textContent=''; topStatus.className='status'; finish.style.display='none'; cover.style.display='grid'; $$('.ring').forEach(r=>r.classList.remove('on','hint')); $$('.wrong-mark').forEach(x=>x.remove()); }
-  function start(){ ensureAudio(); found.clear(); seconds=90; playing=true; updateTimer(); foundCount.textContent='0'; topStatus.textContent=(window.innerWidth<=700&&window.innerHeight>window.innerWidth)?'Двигайте изображение пальцем влево и вправо':''; topStatus.className='status'; finish.style.display='none'; cover.style.display='none'; $$('.ring').forEach(r=>r.classList.remove('on','hint')); $$('.wrong-mark').forEach(x=>x.remove()); if(sceneScroll){ sceneScroll.scrollLeft=0; } timerId=setInterval(()=>{ if(seconds>0){ seconds--; updateTimer(); if(seconds===0){ topStatus.textContent='Время вышло, но можно продолжить поиск'; topStatus.className='status warn'; showToast('Время вышло','Можно продолжить поиск.'); } } },1000); }
-  function stopTimer(){ if(timerId){ clearInterval(timerId); timerId=null; } }
-  $('#start').onclick=start; $('#againBtn').onclick=start;
-  function finishLevel(){ playing=false; stopTimer(); topStatus.textContent='Отлично! Все дефекты найдены'; topStatus.className='status ok'; setTimeout(()=>finish.style.display='grid',350); }
-  function markFound(id){ document.querySelector('[data-r="'+id+'"]').classList.add('on'); found.add(id); foundCount.textContent=String(found.size); const d=DEFECTS[id]; playCorrect(); showToast(d[0],d[1]); if(found.size===5) finishLevel(); }
-  function hint(){ if(!playing) return; const remain=Object.keys(DEFECTS).filter(k=>!found.has(k)); if(!remain.length) return; const id=remain[hintIndex % remain.length]; hintIndex++; const ring=document.querySelector('[data-r="'+id+'"]').classList; ring.add('hint'); setTimeout(()=>ring.remove('hint'),1200); showToast('Подсказка',DEFECTS[id][0]); }
-  $('#hintBtn').onclick=hint;
-  function wrongMark(x,y){ const ns='http://www.w3.org/2000/svg'; const g=document.createElementNS(ns,'g'); g.setAttribute('class','wrong-mark'); const l1=document.createElementNS(ns,'line'); l1.setAttribute('class','wrong-x'); l1.setAttribute('x1',x-12); l1.setAttribute('y1',y-12); l1.setAttribute('x2',x+12); l1.setAttribute('y2',y+12); const l2=document.createElementNS(ns,'line'); l2.setAttribute('class','wrong-x'); l2.setAttribute('x1',x+12); l2.setAttribute('y1',y-12); l2.setAttribute('x2',x-12); l2.setAttribute('y2',y+12); g.appendChild(l1); g.appendChild(l2); $('#map').appendChild(g); setTimeout(()=>g.remove(),650); }
-  function svgPoint(evt){ const svg=$('#map'); const pt=svg.createSVGPoint(); pt.x=evt.clientX; pt.y=evt.clientY; return pt.matrixTransform(svg.getScreenCTM().inverse()); }
-  let pointerStart=null;
-  map.addEventListener('pointerdown',e=>{
-    if(!playing) return;
-    pointerStart={x:e.clientX,y:e.clientY,id:e.target.classList.contains('hot')?e.target.dataset.i:null};
-  });
-  map.addEventListener('pointerup',e=>{
-    if(!playing||!pointerStart) return;
-    const dx=e.clientX-pointerStart.x, dy=e.clientY-pointerStart.y, moved=Math.sqrt(dx*dx+dy*dy);
-    const id=pointerStart.id; pointerStart=null;
-    if(moved>12) return;
-    if(id){ if(!found.has(id)) markFound(id); return; }
-    const p=svgPoint(e); wrongMark(p.x,p.y); playWrong(); showToast('Мимо','Здесь всё в порядке. Посмотрите внимательнее.');
-  });
-  map.addEventListener('pointercancel',()=>{ pointerStart=null; });
-  $$('.hot').forEach(el=>{
-    el.addEventListener('keydown',e=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); if(!playing) return; const id=el.dataset.i; if(found.has(id)) return; markFound(id); } });
-  });
-  $('#copyBtn').onclick=async e=>{ try{ await navigator.clipboard.writeText('GSA-300'); e.target.textContent='Код скопирован'; }catch(err){ e.target.textContent='GSA-300'; } };
-  reset();
+ const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+ const image=$('#gsaCarImage');if(image&&window.GSA_IMG)image.src='data:image/webp;base64,'+window.GSA_IMG;
+ const DEFECTS={tire:['Изношенная шина','Износ протектора ухудшает сцепление и увеличивает тормозной путь.'],brake:['Повреждённый тормозной диск','Коррозия и борозды снижают эффективность торможения.'],shock:['Потёкший амортизатор','Масляные следы указывают на возможную потерю герметичности.'],exhaust:['Повреждённая выхлопная система','Коррозия и утечка газов вызывают шум и запах выхлопа.'],fluid:['Утечка жидкости','Пятно под машиной может быть маслом, антифризом или другой жидкостью.']};
+ const modal=$('#modal'),cover=$('#cover'),finish=$('#finish'),toast=$('#toast'),timer=$('#timer'),timerPill=$('#timerPill'),foundCount=$('#foundCount'),status=$('#topStatus'),scroll=$('#sceneScroll'),map=$('#map');
+ let found=new Set(),seconds=90,timerId=null,playing=false,hintIndex=0,audioCtx=null,pointerStart=null;
+ function audioReady(){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return Promise.reject();if(!audioCtx)audioCtx=new AC();return audioCtx.state==='suspended'?audioCtx.resume():Promise.resolve()}
+ function tone(freq,dur,type,vol,delay){const t=audioCtx.currentTime+(delay||0),o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type=type;o.frequency.setValueAtTime(freq,t);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(vol,t+.012);g.gain.exponentialRampToValueAtTime(.0001,t+dur);o.connect(g);g.connect(audioCtx.destination);o.start(t);o.stop(t+dur+.04)}
+ function sound(kind){audioReady().then(()=>{if(kind==='correct'){tone(740,.13,'triangle',.32,0);tone(988,.14,'triangle',.34,.11);tone(1318,.18,'triangle',.28,.23);navigator.vibrate?.(45)}else if(kind==='wrong'){tone(230,.18,'square',.26,0);tone(155,.24,'sawtooth',.22,.09);navigator.vibrate?.([70,40,70])}else{tone(523,.1,'triangle',.25,0);tone(659,.1,'triangle',.25,.1);tone(784,.14,'triangle',.25,.2)}}).catch(()=>{status.textContent='Проверьте громкость мультимедиа';status.className='status warn'})}
+ function open(){modal.classList.add('on');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden'}function close(){modal.classList.remove('on');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';stopTimer();playing=false}
+ $('#openMain').onclick=$('#badge').onclick=open;$('#close').onclick=close;document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
+ function fmt(s){return String(s/60|0).padStart(2,'0')+':'+String(s%60).padStart(2,'0')}function updateTimer(){timer.textContent=fmt(seconds);timerPill.classList.toggle('low',seconds<=15)}function stopTimer(){if(timerId){clearInterval(timerId);timerId=null}}
+ function showToast(a,b){$('#toastTitle').textContent=a;$('#toastText').textContent=b;toast.classList.add('on');clearTimeout(showToast.id);showToast.id=setTimeout(()=>toast.classList.remove('on'),2600)}
+ function resetVisual(){found.clear();foundCount.textContent='0';$$('.ring').forEach(x=>x.classList.remove('on','hint'));$$('.wrong-mark').forEach(x=>x.remove());finish.style.display='none'}
+ function start(){stopTimer();resetVisual();seconds=90;updateTimer();playing=true;cover.style.display='none';status.textContent='Звук включён. Двигайте фото пальцем.';status.className='status';scroll.scrollLeft=250;scroll.scrollTop=40;sound('start');timerId=setInterval(()=>{if(seconds>0){seconds--;updateTimer();if(!seconds){status.textContent='Время вышло, поиск можно продолжить';status.className='status warn';showToast('Время вышло','Можно продолжить поиск.')}}},1000)}
+ $('#start').onclick=$('#againBtn').onclick=start;$('#soundBtn').onclick=()=>{sound('start');status.textContent='Проверочный звук воспроизведён';status.className='status ok'};
+ function complete(){playing=false;stopTimer();status.textContent='Все дефекты найдены';status.className='status ok';setTimeout(()=>finish.style.display='grid',350)}
+ function hit(id){if(!playing||found.has(id))return;found.add(id);document.querySelector('[data-r="'+id+'"]').classList.add('on');foundCount.textContent=found.size;sound('correct');showToast(...DEFECTS[id]);if(found.size===5)complete()}
+ function hint(){if(!playing)return;const left=Object.keys(DEFECTS).filter(x=>!found.has(x));if(!left.length)return;const id=left[hintIndex++%left.length],ring=document.querySelector('[data-r="'+id+'"]');ring.classList.add('hint');setTimeout(()=>ring.classList.remove('hint'),1800);showToast('Подсказка',DEFECTS[id][0])}$('#hintBtn').onclick=hint;
+ function point(e){const p=map.createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(map.getScreenCTM().inverse())}function wrong(x,y){const ns='http://www.w3.org/2000/svg',g=document.createElementNS(ns,'g');g.classList.add('wrong-mark');for(const d of [[-14,-14,14,14],[14,-14,-14,14]]){const l=document.createElementNS(ns,'line');l.classList.add('wrong-x');l.setAttribute('x1',x+d[0]);l.setAttribute('y1',y+d[1]);l.setAttribute('x2',x+d[2]);l.setAttribute('y2',y+d[3]);g.appendChild(l)}map.appendChild(g);setTimeout(()=>g.remove(),700)}
+ map.addEventListener('pointerdown',e=>{if(playing)pointerStart={x:e.clientX,y:e.clientY,id:e.target.classList.contains('hot')?e.target.dataset.i:null}});map.addEventListener('pointercancel',()=>pointerStart=null);map.addEventListener('pointerup',e=>{if(!playing||!pointerStart)return;const dx=e.clientX-pointerStart.x,dy=e.clientY-pointerStart.y,id=pointerStart.id;pointerStart=null;if(Math.hypot(dx,dy)>14)return;if(id){hit(id);return}const p=point(e);wrong(p.x,p.y);sound('wrong');showToast('Мимо','Здесь всё в порядке. Посмотрите внимательнее.')});
+ $$('.hot').forEach(el=>el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();hit(el.dataset.i)}}));
+ $('#copyBtn').onclick=async e=>{try{await navigator.clipboard.writeText('GSA-300');e.target.textContent='Код скопирован'}catch{e.target.textContent='GSA-300'}};
+ updateTimer();
 })();
 </script>
-</body>
-</html>
+</body></html>
