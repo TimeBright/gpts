@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=yes">
+<title>ГСА - Найди 5 неисправностей</title>
+<link rel="stylesheet" href="style-v2.css">
+</head>
+<body>
+<main class="home"><div><h1>Найдите 5 неисправностей</h1><p>Мини-игра автосервиса. На телефоне двигайте изображение пальцем влево, вправо, вверх и вниз.</p><button class="btn btn-red" id="openMain">Запустить игру</button></div></main>
+<button class="badge" id="badge">🔧 Сыграть и получить подарок</button>
+<div class="modal" id="modal" aria-hidden="true"><div class="box">
+ <div class="head"><div class="brand">Гараж Счастливого Автомобиля</div><div class="hud"><span class="pill">Найдено: <b id="foundCount">0</b>/5</span><span class="pill" id="timerPill">Осталось: <b id="timer">01:30</b></span><button class="close" id="close" aria-label="Закрыть">×</button></div></div>
+ <div class="tools"><button class="btn btn-dark" id="hintBtn">Подсказка</button><button class="btn btn-dark" id="soundBtn">🔊 Звук</button><div class="status" id="status">Загрузка изображения...</div></div>
+ <div class="scene-scroll" id="sceneScroll"><div class="scene" id="scene">
+  <img id="carImage" alt="Автомобиль на подъёмнике">
+  <svg id="map" viewBox="0 0 1672 941" aria-label="Игровая сцена">
+   <ellipse class="hot" data-i="tire" cx="568" cy="408" rx="105" ry="190" tabindex="0"/><ellipse class="ring" data-r="tire" cx="568" cy="408" rx="105" ry="190"/>
+   <ellipse class="hot" data-i="brake" cx="711" cy="369" rx="76" ry="92" tabindex="0"/><ellipse class="ring" data-r="brake" cx="711" cy="369" rx="76" ry="92"/>
+   <ellipse class="hot" data-i="shock" cx="650" cy="190" rx="78" ry="105" tabindex="0"/><ellipse class="ring" data-r="shock" cx="650" cy="190" rx="78" ry="105"/>
+   <ellipse class="hot" data-i="exhaust" cx="1155" cy="579" rx="205" ry="78" tabindex="0"/><ellipse class="ring" data-r="exhaust" cx="1155" cy="579" rx="205" ry="78"/>
+   <ellipse class="hot" data-i="fluid" cx="817" cy="900" rx="118" ry="42" tabindex="0"/><ellipse class="ring" data-r="fluid" cx="817" cy="900" rx="118" ry="42"/>
+  </svg>
+  <div class="toast" id="toast"><b id="toastTitle"></b><span id="toastText"></span></div>
+  <div class="cover" id="cover"><div class="card"><h2>Проведите диагностику</h2><p>Найдите 5 неисправностей за 90 секунд. Картинка загружается в полном разрешении. После нажатия прозвучит проверочный сигнал.</p><button class="btn btn-red" id="start">Начать диагностику</button></div></div>
+  <div class="finish" id="finish"><div class="card"><h2>Все неисправности найдены</h2><p>Первый уровень пройден.</p><div class="coupon">GSA-300</div><div class="finish-actions"><button class="btn btn-red" id="copyBtn">Скопировать купон</button><button class="btn btn-light" id="againBtn">Пройти ещё раз</button></div></div></div>
+ </div></div>
+</div></div>
+<script src="avif-01.js"></script><script src="avif-02.js"></script><script src="avif-03.js"></script><script src="avif-04.js"></script><script src="avif-05.js"></script><script src="avif-06.js"></script><script src="avif-07.js"></script><script src="avif-08.js"></script><script src="avif-09.js"></script><script src="avif-10.js"></script><script src="avif-11.js"></script>
+<script src="app-v2.js"></script>
+</body></html>
